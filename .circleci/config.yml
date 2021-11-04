@@ -159,10 +159,6 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-      - run:
-          name: test fails
-          command: |
-            exit 1
       - destroy-environment
 
 
