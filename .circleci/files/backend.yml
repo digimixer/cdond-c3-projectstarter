@@ -36,9 +36,3 @@ Resources:
         - Key: Name
           Value: !Sub backend-${ID}
 
-Outputs:
-  EC2InstancePublicIP:
-    Value: !GetAtt EC2Instance.PublicIp
-    Description: IP of EC2
-    Export:
-      Name: EC2InstancePublicIP
