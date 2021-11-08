@@ -218,7 +218,16 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yum install -y  python ansible node npm awscli
+            yum install -y python ansible nodejs awscli tar
+            #yum install -y gcc-c++ make 
+            #curl -sL https://rpm.nodesource.com/setup_14.x | bash -s 
+            mkdir ~/.aws
+      - run:
+          name: Configure aws access
+          command: |   
+            echo "[default]
+            aws_access_key_id = ${AWS_ACCESS_KEY_ID}
+            aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}" > ~/.aws/credentials 
       - run:
           name: Get backend url
           command: |
@@ -246,6 +255,7 @@ jobs:
     docker:
       - image: python:3.7-alpine3.11
     steps:
+      - checkout
       - add_ssh_keys:
           fingerprints: ["fe:d6:89:f3:98:a8:14:4c:79:4d:a5:16:54:cb:de:40"]
       - attach_workspace:
@@ -253,8 +263,8 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update ansible
-            pip install awscli
+            apk add --update ansible git 
+            pip install awscli npm
       - run:
           name: Deploy backend
           command: |

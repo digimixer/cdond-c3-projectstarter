@@ -18,6 +18,26 @@
     # prodution: yes
     state: present
 
+- name: Create Directory
+  file:
+    path: "~/backend"
+    state: directory
+
+- name: "Copy artifact to server"
+  copy:
+    src: "~/artifact.tar.gz"
+    dest: "~"
+
+- name: "unpack artifactory"
+  shell: |
+    tar -xzvf artifact.tar.gz -C backend
+    rm artifact.tar.gz
+
+- name: "change dir"
+  shell: |
+    cd backend/dist
+    npm install
+
 - name: "stop pm2"
   become: true
   command: 'pm2 stop default'
