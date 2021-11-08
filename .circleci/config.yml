@@ -207,6 +207,18 @@ jobs:
       - run:
           name: Run migrations
           command: |
+            export AWS_ACCESS_KEY_ID
+            export AWS_DEFAULT_REGION
+            export AWS_SECRET_ACCESS_KEY
+            export TYPEORM_CONNECTION
+            export TYPEORM_MIGRATIONS_DIR
+            export TYPEORM_ENTITIES
+            export TYPEORM_MIGRATIONS
+            export TYPEORM_HOST
+            export TYPEORM_PORT
+            export TYPEORM_USERNAME
+            export TYPEORM_PASSWORD
+            export TYPEORM_DATABASE
             cd backend
             npm install
             npm install reflect-metadata ajv winston 
