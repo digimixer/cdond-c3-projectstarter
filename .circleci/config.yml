@@ -111,6 +111,7 @@ jobs:
             #npm audit fix --audit-level=critical --force
             #npm audit --audit-level=critical
 
+
   # Get output:
   # found 37 vulnerabilities (10 moderate, 18 high, 9 critical) in 1292 scanned packages
   # run `npm audit fix` to fix 23 of them.
