@@ -108,21 +108,7 @@ jobs:
             cd frontend
             npm install
             npm audit fix --audit-level=critical --force
-            #npm audit fix --audit-level=critical --force
-            #npm audit --audit-level=critical
 
-
-  # Get output:
-  # found 37 vulnerabilities (10 moderate, 18 high, 9 critical) in 1292 scanned packages
-  # run `npm audit fix` to fix 23 of them.
-  # 12 vulnerabilities require semver-major dependency updates.
-  # 2 vulnerabilities require manual review. See the full report for details.
-  #
-  # as far as I understood from 4.3:
-  # "The idea here is to have you understand how to fix the vulnerable packages in the code. 
-  # However, the prime objective of the project is building CI/CD pipelines on AWS. "
-  # For this I do not relay on the scan-backend. It'll fail, but the pipeline goes on to remind that there
-  # is still something to do, but I do not take care, as this is not the priority to learn.
   scan-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -207,21 +193,8 @@ jobs:
       - run:
           name: Run migrations
           command: |
-            # export AWS_ACCESS_KEY_ID
-            # export AWS_DEFAULT_REGION
-            # export AWS_SECRET_ACCESS_KEY
-            # export TYPEORM_CONNECTION
-            # export TYPEORM_MIGRATIONS_DIR
-            # export TYPEORM_ENTITIES
-            # export TYPEORM_MIGRATIONS
-            # export TYPEORM_HOST
-            # export TYPEORM_PORT
-            # export TYPEORM_USERNAME
-            # export TYPEORM_PASSWORD
-            # export TYPEORM_DATABASE
             cd backend
             npm install
-            #npm install reflect-metadata ajv winston 
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
       - run:
