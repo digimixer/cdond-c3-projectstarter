@@ -1,0 +1,23 @@
+---
+- name: Create Directory
+  file:
+    path: "~/backend"
+    state: directory
+
+- name: "Copy artifact to server"
+  copy:
+    src: "~/artifact.tar.gz"
+    dest: "~"
+
+- name: "unpack artifactory"
+  shell: |
+    cd ~
+    tar -xzvf artifact.tar.gz -C backend
+    rm artifact.tar.gz
+
+- name: "create pm2"
+  shell: |
+    cd ~/backend/dist
+    npm install
+    pm2 stop default
+    pm2 start npm -- start
