@@ -3,13 +3,15 @@ version: 2.1
 commands:
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
-    #parameters: 
-      # Add parameter here   
+    parameters:
+      workflow_id:
+        type: string 
     steps:
       - run:
           name: Destroy environments
           when: on_fail
           command: |
+            echo "Destroying environment: ${CIRCLE_WORKFLOW_ID:0:7} "
             aws cloudformation delete-stack --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}"
             aws cloudformation delete-stack --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}"
             
@@ -208,7 +210,7 @@ jobs:
             then
               curl -H "Content-Type: text/plain" -H "token: 7933fe63-4687-4fa1-8426-aa25aa1730ec" --request PUT --data "1" https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7}
             fi
-     # Here's where you will add some code to rollback on failure      
+      - destroy-environment     
 
   deploy-frontend:
     docker:
@@ -285,7 +287,7 @@ jobs:
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
 
-      # Here's where you will add some code to rollback on failure  
+      - destroy-environment  
 
   smoke-test:
     docker:
@@ -321,11 +323,12 @@ jobs:
               echo ${URL} 
               if curl -s ${URL} | grep "Welcome"
               then
-                return 0
+                # test smoketest
+                return 1
               else
                 return 1
               fi
-      # Here's where you will add some code to rollback on failure  
+      - destroy-environment
 
 #   cloudfront-update:
 #     docker:
