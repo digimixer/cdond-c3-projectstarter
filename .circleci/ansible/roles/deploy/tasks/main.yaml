@@ -25,7 +25,7 @@
 
 - name: "Copy artifact to server"
   copy:
-    src: "~/artifact.tar.gz"
+    src: "~/backend/artifact.tar.gz"
     dest: "~"
 
 - name: "unpack artifactory"
