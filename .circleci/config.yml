@@ -218,13 +218,11 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yum install -y python ansible nodejs awscli tar
-            #yum install -y gcc-c++ make 
-            #curl -sL https://rpm.nodesource.com/setup_14.x | bash -s 
-            mkdir ~/.aws
+            yum install -y python ansible nodejs awscli tar nodejs nodejs-npm
       - run:
           name: Configure aws access
           command: |   
+            mkdir ~/.aws
             echo "[default]
             aws_access_key_id = ${AWS_ACCESS_KEY_ID}
             aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}" > ~/.aws/credentials 
@@ -233,7 +231,7 @@ jobs:
           command: |
             export BACKEND_IP=$(aws ec2 describe-instances \
               --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --query "Reservations[*].Instances[*].PublicIpAddress" 
+              --query "Reservations[*].Instances[*].PublicIpAddress" \
               --output text)
             export API_URL="http://${BACKEND_IP}:3030"
             echo "API_URL = ${API_URL}"
@@ -263,8 +261,8 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update ansible git 
-            pip install awscli npm
+            apk add --update ansible git nodejs nodejs-npm
+            pip install awscli
       - run:
           name: Deploy backend
           command: |
