@@ -5,6 +5,7 @@ https://github.com/digimixer/cdond-c3-projectstarter
 
 
 1. Public URL for your CloudFront distribution (aka, your blue production front-end) [URL03]
+d3171mjnf3fi5r.cloudfront.net
 
 1. Public URLs to deployed application back-end in EC2 [URL04]
 
