@@ -6,6 +6,10 @@ Parameters:
     Description: Unique identifier.
     Type: String
 
+  EnvironmentName:
+    Description: EnvironmentName - Added for creating error.
+    Type: String
+
 Resources:
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
