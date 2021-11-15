@@ -3,7 +3,7 @@ https://github.com/digimixer/cdond-c3-projectstarter
 
 
 1. Public URL for your S3 Bucket (aka, your green candidate front-end) [URL02]
-https://s3.console.aws.amazon.com/s3/buckets/udapeople-12f06ea?region=us-east-1&tab=objects
+https://udapeople-d17915d.s3.amazonaws.com/index.html#/employees
 
 
 1. Public URL for your CloudFront distribution (aka, your blue production front-end) [URL03]
